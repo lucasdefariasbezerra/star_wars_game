@@ -3,6 +3,10 @@
     margin-top: 18px;
 }
 
+.gridSpace {
+    margin: 27px !important;
+}
+
 .columnPosition {
     margin-left: 27px;
 }
