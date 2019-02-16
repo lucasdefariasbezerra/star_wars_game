@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Button, Container } from 'semantic-ui-react';
+import { Grid, Container } from 'semantic-ui-react';
 import '../template/style.css';
-import { Link } from 'react-router-dom';
 import RowItem from './shared/rowItem';
 import Linker from './shared/linker';
 import consts from '../utils/consts';
