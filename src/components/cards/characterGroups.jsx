@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Image, Grid, Icon } from 'semantic-ui-react';
+import Paginator from '../pagination/paginator';
 import '../../template/style.css';
 
 const { Group, Content } = Card;
@@ -44,6 +45,9 @@ class CharactereGroups extends Component {
                     <Group itemsPerRow={itemsRow}>
                             {this.renderCards()}
                     </Group>
+                    <Row centered>
+                      <Paginator />
+                    </Row>
                 </Grid>
             </div>
         );
