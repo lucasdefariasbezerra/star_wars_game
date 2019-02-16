@@ -1,10 +1,12 @@
 import images from '../../utils/images';
+import consts from '../../utils/consts';
 
 const getImage = (name) => {
     const character = images.filter((img) => img.key === name);
     const object = Object.assign({}, ...character.map(item => ({ key: item })));
     const { key } = object;
-    return key.image;
+    const image = key ? key.image : consts.DEFAULT_IMAGE;
+    return image;
 };
 
 export const mapCharactersPage = (page) => {
@@ -17,6 +19,3 @@ export const mapCharactersPage = (page) => {
     const mappedPage = {...page, results: mappedResults };
     return mappedPage;
 };
-
-
-

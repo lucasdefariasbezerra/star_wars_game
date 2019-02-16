@@ -31,7 +31,6 @@ class CharacteresFeed extends Component {
 
     render() {
         const { page } = this.props;
-        console.log('page zxzxzx ', page);
         return (
             <div>
                 <CharacterGroups charList={page.results} itemsRow={5} />
