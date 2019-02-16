@@ -44,7 +44,7 @@ class Paginator extends Component {
                     color='black'
                     iconType='right arrow'
                     parameters={consts.NEXT}
-                    event={this.handlePageChange}/>
+                    event={this.handlePageChange} />
             </div>
         );
     }

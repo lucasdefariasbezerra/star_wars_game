@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
     page: {},
-    openChar: {}
+    openChar: {},
+    isModalOpen: false,
+    modalType: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -8,7 +10,11 @@ export default (state = INITIAL_STATE, action) => {
         case 'CHARACTERS_LIST':
               return { ...state, page: action.payload };
         case 'OPEN_CHAR':
-              return { ...state, openChar: action.payload };
+              return { ...state, openChar: action.payload};
+        case 'OPEN_MODAL':
+             return { ...state, isModalOpen: true, modalType: action.payload};
+        case 'CLOSE_MODAL':
+             return { ...state, isModalOpen: false, modalType: ''};
         default:
             return state;
     }

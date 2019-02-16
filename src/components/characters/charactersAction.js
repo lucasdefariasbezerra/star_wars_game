@@ -15,3 +15,16 @@ export const mapResults = (page) => {
   const action = { type: 'CHARACTERS_LIST', payload: mappedPage };
   return action;
 };
+
+export const openModal = (modalType) => {
+    return {
+        type: 'OPEN_MODAL',
+        payload: modalType
+    };
+};
+
+export const closeModal = () => {
+    return {
+        type: 'CLOSE_MODAL'
+    };
+};
