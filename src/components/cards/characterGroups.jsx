@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Image, Grid, Icon } from 'semantic-ui-react';
 import Paginator from '../pagination/paginator';
+import CharacterCard from './characterCard';
 import '../../template/style.css';
 
 const { Group, Content } = Card;
-const { Row, Column } = Grid;
+const { Row } = Grid;
 
 class CharactereGroups extends Component {
 
@@ -21,19 +22,8 @@ class CharactereGroups extends Component {
 
     renderCards = () => {
         const { charList } = this.props;
-        console.log('charList zxzx ', charList);
         return charList.map((char) => (
-            <Card key={char.name} >
-              <Image src={char.image} className='fixedHeight'/>
-                <Content extra>
-                     <Button icon color='green' floated='right'>
-                        <Icon name='currency' />
-                     </Button>
-                    <Button icon color='blue' floated='right'>
-                        <Icon name='currency' />
-                    </Button>
-                </Content>
-            </Card>
+            <CharacterCard key={char.name} character={char} />
         ));
     };
 
