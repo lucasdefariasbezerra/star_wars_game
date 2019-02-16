@@ -12,9 +12,11 @@ export default (state = INITIAL_STATE, action) => {
         case 'OPEN_CHAR':
               return { ...state, openChar: action.payload};
         case 'OPEN_MODAL':
-             return { ...state, isModalOpen: true, modalType: action.payload};
+             return { ...state, isModalOpen: true,
+                modalType: action.payload.modalType,
+                openChar: action.payload.character };
         case 'CLOSE_MODAL':
-             return { ...state, isModalOpen: false, modalType: ''};
+             return { ...state, isModalOpen: false, modalType: '', openChar: {}};
         default:
             return state;
     }

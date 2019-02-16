@@ -5,18 +5,20 @@ import { connect } from 'react-redux';
 import { closeModal } from '../characters/charactersAction';
 import PropTypes from 'prop-types';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
-
+import consts from '../../utils/consts';
 const { Content, Actions } = Modal;
 
 class CharModal extends Component {
 
     static propTypes = {
         isOpen: PropTypes.bool,
+        modalType: PropTypes.string,
         closeModal: PropTypes.func
     };
 
     static defaultProps = {
         isOpen: false,
+        modalType: '',
         closeModal: () => {}
     };
 
@@ -25,17 +27,22 @@ class CharModal extends Component {
         closeModal();
     }
 
+    renderText = (modal) => {
+        const isGuess = modal === consts.GUESS_MODAL;
+        const content = isGuess ? ' guess the name ' : ' character info ';
+        return content;
+    }
+
     render() {
-        const { isOpen } = this.props;
+        const { isOpen, modalType } = this.props;
         return (
             <Modal open={isOpen} onClose={this.handleClose} size='small'>
-                <Header icon='browser' content='Cookies policy' />
+                <Header icon='browser' content={this.renderText(modalType)} />
                 <Content>
-                    <h3>digite o personagem</h3>
                 </Content>
                 <Actions>
-                    <Button color='green' onClick={this.handleClose} inverted>
-                        <Icon name='checkmark' /> Got it
+                    <Button color='red' onClick={this.handleClose} inverted>
+                        <Icon name='close' /> Close
                     </Button>
                 </Actions>
             </Modal>
@@ -43,6 +50,7 @@ class CharModal extends Component {
     }
 }
 
-const mapStateToProps = state => ({ isOpen: state.character.isModalOpen });
+const mapStateToProps = state => ({ isOpen: state.character.isModalOpen,
+    modalType: state.character.modalType });
 const mapDispatchToProps = dispatch => bindActionCreators({ closeModal }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(CharModal);

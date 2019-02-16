@@ -16,10 +16,11 @@ export const mapResults = (page) => {
   return action;
 };
 
-export const openModal = (modalType) => {
+export const openModal = (modalType, character) => {
+    const payload = { modalType, character };
     return {
         type: 'OPEN_MODAL',
-        payload: modalType
+        payload
     };
 };
 

@@ -24,8 +24,8 @@ class CharacterCard extends Component {
 
     handleOpen = (modal) => {
         console.log('modal ', modal);
-        const { openModal } = this.props;
-        openModal(modal);
+        const { openModal, character } = this.props;
+        openModal(modal, character);
     };
 
     render() {
