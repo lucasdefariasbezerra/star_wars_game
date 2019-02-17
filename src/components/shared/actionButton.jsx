@@ -11,7 +11,8 @@ class ActionButton extends Component {
         iconType: PropTypes.string,
         size: PropTypes.string,
         color: PropTypes.string,
-        side: PropTypes.string
+        side: PropTypes.string,
+        disabled: PropTypes.bool
     };
 
     static defaultProps = {
@@ -20,19 +21,22 @@ class ActionButton extends Component {
         iconType: '',
         size: '',
         color: '',
-        side: ''
+        side: '',
+        disabled: false
     };
 
     handleEvent = () => {
-        console.log('cai aqui zxzx ');
         const { event, parameters } = this.props;
         event(parameters);
     };
 
     render() {
-        const {size, color, iconType, side } = this.props;
+        const {size, color, iconType, side, disabled } = this.props;
         return (
-            <Button icon size={size} color={color} onClick={this.handleEvent} floated={side} >
+            <Button icon size={size} color={color}
+                onClick={this.handleEvent}
+                floated={side}
+                disabled={disabled} >
                 <Icon name={iconType}/>
             </Button>
         );

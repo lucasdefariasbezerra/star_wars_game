@@ -4,6 +4,7 @@ import consts from '../../utils/consts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { closeModal } from '../characters/charactersAction';
+import { changeIsTakenInfo } from '../game/gameActions';
 import PropTypes from 'prop-types';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import CharacterInfo from '../characters/characterInfo';
@@ -17,18 +18,24 @@ class CharModal extends Component {
     static propTypes = {
         isOpen: PropTypes.bool,
         modalType: PropTypes.string,
-        closeModal: PropTypes.func
+        closeModal: PropTypes.func,
+        changeIsTakenInfo: PropTypes.func
     };
 
     static defaultProps = {
         isOpen: false,
         modalType: '',
-        closeModal: () => {}
+        closeModal: () => {},
+        changeIsTakenInfo: () => {}
     };
 
     handleClose = () => {
-        const { closeModal } = this.props;
+        const { closeModal, changeIsTakenInfo, modalType } = this.props;
         closeModal();
+        console.log('modalType ', modalType);
+        if (modalType !== consts.INFO_MODAL) {
+            changeIsTakenInfo(false);
+        }
     }
 
     renderText = (modal) => {
@@ -59,5 +66,5 @@ class CharModal extends Component {
 
 const mapStateToProps = state => ({ isOpen: state.character.isModalOpen,
     modalType: state.character.modalType });
-const mapDispatchToProps = dispatch => bindActionCreators({ closeModal }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ closeModal, changeIsTakenInfo }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(CharModal);

@@ -5,8 +5,7 @@ const INITIAL_STATE = {
     modalType: '',
     species: [],
     films: [],
-    vehicles: [],
-    planet: ''
+    vehicles: []
 };
 
 export default (state = INITIAL_STATE, action) => {

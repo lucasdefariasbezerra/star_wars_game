@@ -4,6 +4,7 @@ import { Card, Image } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { openModal } from '../characters/charactersAction';
+import { changeIsTakenInfo } from '../game/gameActions';
 import { toast } from 'react-semantic-toasts';
 import ActionButton from '../shared/actionButton';
 import '../../template/style.css';
@@ -15,22 +16,40 @@ class CharacterCard extends Component {
 
     static propTypes = {
         openModal: PropTypes.func,
-        character: PropTypes.objectOf(PropTypes.any)
+        changeIsTakenInfo: PropTypes.func,
+        character: PropTypes.objectOf(PropTypes.any),
+        shots: PropTypes.number
     };
 
     static defaultProps = {
         openModal: () => {},
-        character: {}
+        changeIsTakenInfo: () => {},
+        character: {},
+        shots: 10
     };
 
     handleOpen = (modal) => {
-        const { openModal, character } = this.props;
+        const { openModal, character, shots } = this.props;
         if (character.disabled) {
             const toaster = {...consts.TOASTER_TEMPLATE, type: 'warning',
                 description: 'Voce ja tentou advinhar esse personagem', title: 'Advertência' };
             setTimeout(() => { toast(toaster); }, 2000);
         } else {
-            openModal(modal, character);
+            /* this if checks when the modal type
+               in order to change the isInfoChecked flag
+               to make the points calculation */
+            if (modal === consts.INFO_MODAL) {
+                console.log('change to true');
+                changeIsTakenInfo(true);
+            }
+
+            /*
+              while the number of shots in greater than 0
+              the user can open both info and game modal
+            */
+            if (shots > 0) {
+                openModal(modal, character);
+            }
         }
     };
 
@@ -47,5 +66,6 @@ class CharacterCard extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ openModal }, dispatch);
-export default connect(null, mapDispatchToProps)(CharacterCard);
+const mapStateToProps = state => ({ shots: state.game.shots });
+const mapDispatchToProps = dispatch => bindActionCreators({ openModal, changeIsTakenInfo }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterCard);

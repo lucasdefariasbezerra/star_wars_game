@@ -43,6 +43,13 @@ const resolvePromise = (fetch, action, field) => {
     });
 };
 
+const setCheckedInfo = () => {
+    return {
+        type: 'CHECK_INFO',
+        payload: true
+    };
+};
+
 export const fetchCharacterDetails = (character) => {
     return dispatch => {
         const { species, films, homeworld, vehicles } = character;
@@ -65,5 +72,6 @@ export const fetchCharacterDetails = (character) => {
         const fetchPlanetRequest = fetch(homeworld);
         dispatch(resolvePromise(fetchPlanetRequest, consts.SET_PLANET, 'name'));
 
+        dispatch(setCheckedInfo());
     };
 };

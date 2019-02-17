@@ -3,7 +3,7 @@ import '../../template/style.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { closeModal, disableCharacter } from '../characters/charactersAction';
-import { calculatePoints } from './gameActions';
+import { calculatePoints, changeIsTakenInfo } from './gameActions';
 import PropTypes from 'prop-types';
 import { Container, Form } from 'semantic-ui-react';
 const { Field, Input } = Form;
@@ -13,7 +13,8 @@ import consts from '../../utils/consts';
 
 class GameForm extends Component {
     state = {
-        guess: ''
+        guess: '',
+        clicked: false
     }
 
     static propTypes = {
@@ -22,7 +23,8 @@ class GameForm extends Component {
         page: PropTypes.objectOf(PropTypes.any),
         closeModal: PropTypes.func,
         calculatePoints: PropTypes.func,
-        disableCharacter: PropTypes.func
+        disableCharacter: PropTypes.func,
+        changeIsTakenInfo: PropTypes.func
     };
 
     static defaultProps = {
@@ -31,7 +33,8 @@ class GameForm extends Component {
         page: {},
         closeModal: () => {},
         calculatePoints: () => {},
-        disableCharacter: () => {}
+        disableCharacter: () => {},
+        changeIsTakenInfo: () => {}
     };
 
     handleInputChange = (e) => {
@@ -41,11 +44,14 @@ class GameForm extends Component {
     }
 
     handleGuess = () => {
-        const { character } = this.props;
+        const { character, changeIsTakenInfo, game } = this.props;
         const { guess } = this.state;
         const { name } = character;
-        this.calculateScore(guess, character.name);
+        const { infoChecked } = game;
+        this.calculateScore(guess, character.name, infoChecked);
         this.handleDisableCharacter(name);
+        this.setState({ clicked: true });
+        changeIsTakenInfo(false);
     };
 
     handleDisableCharacter = (name) => {
@@ -63,14 +69,14 @@ class GameForm extends Component {
         disableCharacter(newPage);
     };
 
-    calculateScore = (guess, name) => {
+    calculateScore = (guess, name, infoChecked) => {
         console.log('guess ', guess, ' name ', name);
         const { game, calculatePoints } = this.props;
         let message = '';
         let points = 0;
         const shots = game.shots - 1;
         if (guess.toLowerCase() === name.toLowerCase()) {
-            points = game.point + 10;
+            points = infoChecked ? game.point + 5 : game.point + 10;
             message = `Voce Acertou. Sua pontuação é ${points}. Você tem ${shots} tentativas`;
             const toaster = this.mountToaster(message, consts.SUCCESS);
             this.setToaster(toaster);
@@ -97,6 +103,7 @@ class GameForm extends Component {
     }
 
     render() {
+        const { clicked } = this.state;
         return (
             <Container text>
                 <Form>
@@ -107,7 +114,11 @@ class GameForm extends Component {
                             label='personagem'
                             onChange={this.handleInputChange} />
                     </Field>
-                    <ActionButton iconType='target' size='big' color= 'green' event={this.handleGuess} />
+                    <ActionButton iconType='target'
+                        size='big'
+                        color= 'green'
+                        event={this.handleGuess}
+                        disabled={clicked} />
                 </Form>
             </Container>
         );
@@ -117,5 +128,6 @@ class GameForm extends Component {
 const mapStateToProps = state => ({ character: state.character.openChar,
                                     game: state.game,
                                     page: state.character.page });
-const mapDispatchToProps = dispatch => bindActionCreators({ closeModal, calculatePoints, disableCharacter }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ closeModal, calculatePoints,
+    disableCharacter, changeIsTakenInfo }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(GameForm);
