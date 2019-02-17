@@ -56,7 +56,7 @@ export const fetchCharacterDetails = (character) => {
         });
 
         const fetchPlanetRequest = fetch(homeworld);
-        dispatch(resolvePromise(fetchPlanetRequest, consts.SET_VEHICLES, 'name'));
+        dispatch(resolvePromise(fetchPlanetRequest, consts.SET_PLANET, 'name'));
 
     };
 };
