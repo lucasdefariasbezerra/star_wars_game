@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchCharacters } from './charactersAction';
 import PropTypes from 'prop-types';
+import { SemanticToastContainer } from 'react-semantic-toasts';
 import CharacterGroups from '../cards/characterGroups';
 import CharModal from '../modal/charModal';
 
@@ -34,6 +35,7 @@ class CharacteresFeed extends Component {
         const { page } = this.props;
         return (
             <div>
+                <SemanticToastContainer />
                 <CharModal />
                 <CharacterGroups charList={page.results} itemsRow={5} />
             </div>

@@ -22,6 +22,13 @@ export const openModal = (modalType, character) => {
     return { type: 'OPEN_MODAL', payload };
 };
 
+export const disableCharacter = (page) => {
+    return {
+        type: 'CHARACTERS_LIST',
+        payload: page
+    };
+};
+
 export const closeModal = () => {
     return { type: 'CLOSE_MODAL' };
 };

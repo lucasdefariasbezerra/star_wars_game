@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, Image, Icon } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { openModal } from '../characters/charactersAction';
+import { toast } from 'react-semantic-toasts';
 import ActionButton from '../shared/actionButton';
 import '../../template/style.css';
 import consts from '../../utils/consts';
@@ -23,9 +24,14 @@ class CharacterCard extends Component {
     };
 
     handleOpen = (modal) => {
-        console.log('modal ', modal);
         const { openModal, character } = this.props;
-        openModal(modal, character);
+        if (character.disabled) {
+            const toaster = {...consts.TOASTER_TEMPLATE, type: 'warning',
+                description: 'Voce ja tentou advinhar esse personagem', title: 'Advertência' };
+            setTimeout(() => { toast(toaster); }, 2000);
+        } else {
+            openModal(modal, character);
+        }
     };
 
     render() {
