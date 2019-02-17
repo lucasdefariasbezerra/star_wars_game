@@ -20,7 +20,11 @@ export default (state = INITIAL_STATE, action) => {
                 modalType: action.payload.modalType,
                 openChar: action.payload.character };
         case 'CLOSE_MODAL':
-             return { ...state, isModalOpen: false, modalType: '', openChar: {}, species: [], films: []};
+             return { ...state, isModalOpen: false, modalType: '',
+             openChar: {},
+             species: [],
+             films: [],
+             vehicles: []};
         case 'SET_SPECIES':
              return { ...state, species: state.species.concat(action.payload)};
         case 'SET_FILMS':

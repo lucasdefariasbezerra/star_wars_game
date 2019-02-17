@@ -7,6 +7,7 @@ import { closeModal } from '../characters/charactersAction';
 import PropTypes from 'prop-types';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import CharacterInfo from '../characters/characterInfo';
+import GameForm from '../game/gameForm';
 
 
 const { Content, Actions } = Modal;
@@ -37,7 +38,7 @@ class CharModal extends Component {
     }
 
     renderContent = (modal) => {
-        return modal === consts.GUESS_MODAL ? (<div>TODO</div>) : (<CharacterInfo />);
+        return modal === consts.GUESS_MODAL ? (<GameForm />) : (<CharacterInfo />);
     }
 
     render() {
