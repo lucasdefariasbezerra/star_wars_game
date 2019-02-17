@@ -11,11 +11,19 @@ class CharacterInfo extends Component {
 
     static propTypes = {
         character: PropTypes.objectOf(PropTypes.any),
+        films: PropTypes.arrayOf(PropTypes.any),
+        vehicles: PropTypes.arrayOf(PropTypes.any),
+        species: PropTypes.arrayOf(PropTypes.any),
+        planet: PropTypes.string,
         fetchCharacterDetails: PropTypes.func
     };
 
     static defaultProps = {
         character: {},
+        films: [],
+        vehicles: [],
+        species: [],
+        planet: '',
         fetchCharacterDetails: () => {}
     };
 
@@ -25,8 +33,16 @@ class CharacterInfo extends Component {
         fetchCharacterDetails(clone);
     }
 
+    renderText = (list) => {
+        if (list.lenght === 1) {
+            return list[0];
+        } else {
+            return list.join(', ');
+        }
+    }
+
     render() {
-        const { character } = this.props;
+        const { character, films, vehicles, planet, species } = this.props;
         return (
             <Container text>
                 <Grid>
@@ -36,17 +52,17 @@ class CharacterInfo extends Component {
                         </Column>
                         <Column width={6}>
                             <Header>Details</Header>
-                            <p>Specie: TODO</p>
+                            <p>Specie: {this.renderText(species)}</p>
                             <p>Height: {character.height} </p>
                             <p>Hair: {character.hair_color} </p>
-                            <p>Planet:TODO </p>
+                            <p>Planet: {this.renderText([planet])} </p>
                         </Column>
                     </Row>
 
                     <Row columns={1}>
                         <Column>
-                            <p>Wve found the following gravatar image associated with your e-mail address.</p>
-                            <p>Is it okay to use this photo?</p>
+                            <p>Films : {this.renderText(films)}</p>
+                            <p>Vehicles : {this.renderText(vehicles) === '' ? 'n/a' : this.renderText(vehicles) }</p>
                         </Column>
                     </Row>
                 </Grid>
@@ -55,6 +71,11 @@ class CharacterInfo extends Component {
     }
 }
 
-const mapStateToProps = state => ({ character: state.character.openChar });
+const mapStateToProps = state => ({ character: state.character.openChar,
+    species: state.character.species,
+    films: state.character.films,
+    vehicles: state.character.vehicles,
+    planet: state.character.planet });
+
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchCharacterDetails }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterInfo);

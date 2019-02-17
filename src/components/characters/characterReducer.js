@@ -4,7 +4,9 @@ const INITIAL_STATE = {
     isModalOpen: false,
     modalType: '',
     species: [],
-    films: []
+    films: [],
+    vehicles: [],
+    planet: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,6 +25,10 @@ export default (state = INITIAL_STATE, action) => {
              return { ...state, species: state.species.concat(action.payload)};
         case 'SET_FILMS':
             return { ...state, films: state.films.concat(action.payload)};
+        case 'SET_PLANET':
+            return { ...state, planet: action.payload };
+        case 'SET_VEHICLES':
+            return { ...state, vehicles: state.vehicles.concat(action.payload) };
         default:
             return state;
     }

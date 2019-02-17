@@ -4,6 +4,11 @@ const NEXT = 'NEXT';
 const DEFAULT_IMAGE = 'https://react.semantic-ui.com/images/avatar/large/elliot.jpg';
 const GUESS_MODAL = 'GUESS_MODAL';
 const INFO_MODAL = 'INFO_MODAL';
+const SET_SPECIES = 'SET_SPECIES';
+const SET_FILMS = 'SET_FILMS';
+const SET_PLANET = 'SET_PLANET';
+const SET_VEHICLES = 'SET_VEHICLES';
+
 
 export default {
     BUTTON,
@@ -11,5 +16,9 @@ export default {
     NEXT,
     DEFAULT_IMAGE,
     GUESS_MODAL,
-    INFO_MODAL
+    INFO_MODAL,
+    SET_SPECIES,
+    SET_FILMS,
+    SET_PLANET,
+    SET_VEHICLES
 };
