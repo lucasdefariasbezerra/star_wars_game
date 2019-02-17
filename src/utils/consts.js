@@ -8,6 +8,18 @@ const SET_SPECIES = 'SET_SPECIES';
 const SET_FILMS = 'SET_FILMS';
 const SET_PLANET = 'SET_PLANET';
 const SET_VEHICLES = 'SET_VEHICLES';
+const SUCCESS = 'SUCCESS';
+const ERROR = 'ERROR';
+
+const TOASTER_TEMPLATE = {
+    type: 'success',
+    icon: 'info',
+    title: 'Pontuação',
+    description: '',
+    time: 5000,
+    onClick: () => {},
+    onClose: () => {}
+};
 
 
 export default {
@@ -20,5 +32,8 @@ export default {
     SET_SPECIES,
     SET_FILMS,
     SET_PLANET,
-    SET_VEHICLES
+    SET_VEHICLES,
+    TOASTER_TEMPLATE,
+    ERROR,
+    SUCCESS
 };
