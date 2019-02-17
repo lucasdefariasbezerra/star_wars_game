@@ -2,7 +2,9 @@ const INITIAL_STATE = {
     page: {},
     openChar: {},
     isModalOpen: false,
-    modalType: ''
+    modalType: '',
+    species: [],
+    films: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,7 +18,11 @@ export default (state = INITIAL_STATE, action) => {
                 modalType: action.payload.modalType,
                 openChar: action.payload.character };
         case 'CLOSE_MODAL':
-             return { ...state, isModalOpen: false, modalType: '', openChar: {}};
+             return { ...state, isModalOpen: false, modalType: '', openChar: {}, species: [], films: []};
+        case 'SET_SPECIES':
+             return { ...state, species: state.species.concat(action.payload)};
+        case 'SET_FILMS':
+            return { ...state, films: state.films.concat(action.payload)};
         default:
             return state;
     }

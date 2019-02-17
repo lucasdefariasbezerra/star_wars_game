@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import '../../template/style.css';
+import consts from '../../utils/consts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { closeModal } from '../characters/charactersAction';
 import PropTypes from 'prop-types';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
-import consts from '../../utils/consts';
+import CharacterInfo from '../characters/characterInfo';
+
+
 const { Content, Actions } = Modal;
 
 class CharModal extends Component {
@@ -33,13 +36,16 @@ class CharModal extends Component {
         return content;
     }
 
+    renderContent = (modal) => {
+        return modal === consts.GUESS_MODAL ? (<div>TODO</div>) : (<CharacterInfo />);
+    }
+
     render() {
         const { isOpen, modalType } = this.props;
         return (
             <Modal open={isOpen} onClose={this.handleClose} size='small'>
                 <Header icon='browser' content={this.renderText(modalType)} />
-                <Content>
-                </Content>
+                <Content>{ this.renderContent(modalType) }</Content>
                 <Actions>
                     <Button color='red' onClick={this.handleClose} inverted>
                         <Icon name='close' /> Close
