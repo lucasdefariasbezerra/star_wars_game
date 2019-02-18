@@ -10,13 +10,14 @@ const SET_PLANET = 'SET_PLANET';
 const SET_VEHICLES = 'SET_VEHICLES';
 const SUCCESS = 'SUCCESS';
 const ERROR = 'ERROR';
+const DEFAULT_URL = 'https://swapi.co/api/people/?page=1';
 
 const TOASTER_TEMPLATE = {
     type: 'success',
     icon: 'info',
     title: 'Pontuação',
     description: '',
-    time: 5000,
+    time: 2000,
     onClick: () => {},
     onClose: () => {}
 };
@@ -35,5 +36,6 @@ export default {
     SET_VEHICLES,
     TOASTER_TEMPLATE,
     ERROR,
-    SUCCESS
+    SUCCESS,
+    DEFAULT_URL
 };

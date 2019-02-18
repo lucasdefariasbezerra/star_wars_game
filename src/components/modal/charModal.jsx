@@ -32,7 +32,6 @@ class CharModal extends Component {
     handleClose = () => {
         const { closeModal, changeIsTakenInfo, modalType } = this.props;
         closeModal();
-        console.log('modalType ', modalType);
         if (modalType !== consts.INFO_MODAL) {
             changeIsTakenInfo(false);
         }

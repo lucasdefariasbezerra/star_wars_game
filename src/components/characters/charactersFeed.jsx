@@ -7,14 +7,10 @@ import PropTypes from 'prop-types';
 import { SemanticToastContainer } from 'react-semantic-toasts';
 import CharacterGroups from '../cards/characterGroups';
 import CharModal from '../modal/charModal';
+import SpecialModal from '../modal/specialModal';
+import consts from '../../utils/consts';
 
 class CharacteresFeed extends Component {
-
-    state = {
-        points: 0,
-        pageUrl: 'https://swapi.co/api/people/?page=1'
-    }
-
     static propTypes = {
         fetchCharacters: PropTypes.func,
         page: PropTypes.objectOf(PropTypes.any)
@@ -26,9 +22,8 @@ class CharacteresFeed extends Component {
     };
 
     componentDidMount() {
-        const { pageUrl } = this.state;
         const { fetchCharacters } = this.props;
-        fetchCharacters(pageUrl);
+        fetchCharacters(consts.DEFAULT_URL);
     }
 
     render() {
@@ -37,6 +32,7 @@ class CharacteresFeed extends Component {
             <div>
                 <SemanticToastContainer />
                 <CharModal />
+                <SpecialModal />
                 <CharacterGroups charList={page.results} itemsRow={5} />
             </div>
         );

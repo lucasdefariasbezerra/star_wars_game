@@ -3,7 +3,7 @@ import '../../template/style.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { closeModal, disableCharacter } from '../characters/charactersAction';
-import { calculatePoints, changeIsTakenInfo } from './gameActions';
+import { calculatePoints, changeIsTakenInfo, handleSpecialModal } from './gameActions';
 import PropTypes from 'prop-types';
 import { Container, Form } from 'semantic-ui-react';
 const { Field, Input } = Form;
@@ -24,7 +24,8 @@ class GameForm extends Component {
         closeModal: PropTypes.func,
         calculatePoints: PropTypes.func,
         disableCharacter: PropTypes.func,
-        changeIsTakenInfo: PropTypes.func
+        changeIsTakenInfo: PropTypes.func,
+        handleSpecialModal: PropTypes.func
     };
 
     static defaultProps = {
@@ -34,7 +35,8 @@ class GameForm extends Component {
         closeModal: () => {},
         calculatePoints: () => {},
         disableCharacter: () => {},
-        changeIsTakenInfo: () => {}
+        changeIsTakenInfo: () => {},
+        handleSpecialModal: () => {}
     };
 
     handleInputChange = (e) => {
@@ -65,28 +67,32 @@ class GameForm extends Component {
             }
         });
         const newPage = { ...page, results: newList };
-        console.log('newPage ', newPage);
         disableCharacter(newPage);
     };
 
+
     calculateScore = (guess, name, infoChecked) => {
-        console.log('guess ', guess, ' name ', name);
-        const { game, calculatePoints } = this.props;
+        const { game, calculatePoints, handleSpecialModal } = this.props;
         let message = '';
         let points = 0;
         const shots = game.shots - 1;
+        const shotsMessage = shots > 0 ? `Você tem ${shots} tentativas` : '';
         if (guess.toLowerCase() === name.toLowerCase()) {
             points = infoChecked ? game.point + 5 : game.point + 10;
-            message = `Voce Acertou. Sua pontuação é ${points}. Você tem ${shots} tentativas`;
+            message = `Voce Acertou. Sua pontuação é ${points}. ${shotsMessage}`;
             const toaster = this.mountToaster(message, consts.SUCCESS);
             this.setToaster(toaster);
         } else {
             points = game.point;
-            message = `Voce ERROU. Sua pontuação é ${points}. Você tem ${shots} tentativas`;
+            message = `Voce ERROU. Sua pontuação é ${points}. ${shotsMessage}`;
             const toaster = this.mountToaster(message, consts.ERROR);
             this.setToaster(toaster);
         }
         calculatePoints(points, shots);
+        if (shots === 0) {
+            console.log('cai aqui');
+            handleSpecialModal(true);
+        }
     }
 
     mountToaster = (message, type) => {
@@ -129,5 +135,5 @@ const mapStateToProps = state => ({ character: state.character.openChar,
                                     game: state.game,
                                     page: state.character.page });
 const mapDispatchToProps = dispatch => bindActionCreators({ closeModal, calculatePoints,
-    disableCharacter, changeIsTakenInfo }, dispatch);
+    disableCharacter, changeIsTakenInfo, handleSpecialModal }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(GameForm);

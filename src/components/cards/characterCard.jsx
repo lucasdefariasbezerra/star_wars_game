@@ -35,11 +35,9 @@ class CharacterCard extends Component {
                 description: 'Voce ja tentou advinhar esse personagem', title: 'Advertência' };
             setTimeout(() => { toast(toaster); }, 2000);
         } else {
-            /* this if checks when the modal type
-               in order to change the isInfoChecked flag
-               to make the points calculation */
+            /* this sets isInfoChecked flag to true
+               when info modal is checked */
             if (modal === consts.INFO_MODAL) {
-                console.log('change to true');
                 changeIsTakenInfo(true);
             }
 
@@ -59,8 +57,8 @@ class CharacterCard extends Component {
         <Card>
             <Image src={character.image} className='fixedHeight'/>
             <Content extra>
-                <ActionButton iconType='currency' size='medium' color='green' parameters={consts.GUESS_MODAL} side='right' event={this.handleOpen} />
-                <ActionButton iconType='currency' size='medium' color='blue' parameters={consts.INFO_MODAL} side='right' event={this.handleOpen} />
+                <ActionButton iconType='play' size='medium' color='green' parameters={consts.GUESS_MODAL} side='right' event={this.handleOpen} />
+                <ActionButton iconType='info' size='medium' color='blue' parameters={consts.INFO_MODAL} side='right' event={this.handleOpen} />
             </Content>
         </Card> );
     }

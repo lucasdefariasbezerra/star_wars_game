@@ -22,8 +22,6 @@ class Paginator extends Component {
 
     handlePageChange = (direction) => {
         const { page, fetchCharacters } = this.props;
-        console.log('page next ', page.next);
-        console.log('page previous ', page.previous);
         if (direction === consts.NEXT && page.next) {
             fetchCharacters(page.next);
         } else if (direction === consts.PREVIOUS && page.previous) {
