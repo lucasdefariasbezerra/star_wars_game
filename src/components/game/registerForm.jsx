@@ -89,7 +89,6 @@ class RegisterForm extends Component {
 
             const register = this.mountStorageObject({ ... game}, { ... this.state });
             localStorage.setItem(name, JSON.stringify(register));
-            console.log('here is the localstorage ', localStorage.getItem(name));
             resetGameDefaultConfig();
             fetchCharacters(consts.DEFAULT_URL);
         }
@@ -102,8 +101,6 @@ class RegisterForm extends Component {
 
     render() {
         const { registerDone, nameError, emailError } = this.state;
-        console.log('nameError ', nameError);
-        console.log('emailError ', emailError);
         return (
             <Container text>
                 <Form>

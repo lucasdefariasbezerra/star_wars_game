@@ -30,7 +30,6 @@ class SpecialModal extends Component {
         const { isOpen, points } = this.props;
         const pointsMessage = points !== 0 ? `${points} pontos marcados ` : '';
         const message = `Quiz Finalizado. ${pointsMessage}`;
-        console.log('points zxzx ', points);
         return (
             <Modal open={isOpen} onClose={this.handleClose} >
                 <Header icon='info' content={message} />
