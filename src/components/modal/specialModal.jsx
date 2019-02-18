@@ -14,21 +14,26 @@ class SpecialModal extends Component {
 
     static propTypes = {
         isOpen: PropTypes.bool,
+        points: PropTypes.number,
         modalType: PropTypes.string
     };
 
     static defaultProps = {
         isOpen: true,
+        points: 0,
         modalType: ''
     };
 
     handleClose = () => {}
 
     render() {
-        const { isOpen } = this.props;
+        const { isOpen, points } = this.props;
+        const pointsMessage = points !== 0 ? `${points} pontos marcados ` : '';
+        const message = `Quiz Finalizado. ${pointsMessage}`;
+        console.log('points zxzx ', points);
         return (
             <Modal open={isOpen} onClose={this.handleClose} >
-                <Header icon='info' content='Quiz Finalizado' />
+                <Header icon='info' content={message} />
                 <Content>
                     <RegisterForm />
                 </Content>
@@ -39,6 +44,7 @@ class SpecialModal extends Component {
     }
 }
 
-const mapStateToProps = state => ({ isOpen: state.game.specialModalOpen });
+const mapStateToProps = state => ({ isOpen: state.game.specialModalOpen,
+    points: state.game.point });
 // const mapDispatchToProps = dispatch => bindActionCreators({ closeModal }, dispatch);
 export default connect(mapStateToProps, null)(SpecialModal);

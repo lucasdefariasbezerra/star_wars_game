@@ -39,7 +39,7 @@ class CharModal extends Component {
 
     renderText = (modal) => {
         const isGuess = modal === consts.GUESS_MODAL;
-        const content = isGuess ? ' guess the name ' : ' character info ';
+        const content = isGuess ? ' faça o seu palpite ' : ' info do personagem ';
         return content;
     }
 

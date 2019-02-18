@@ -16,7 +16,9 @@ const { Field, Input } = Form;
 class RegisterForm extends Component {
     state = {
         name: '',
+        nameError: false,
         email: '',
+        emailError: false,
         registerDone: false
     }
 
@@ -46,13 +48,48 @@ class RegisterForm extends Component {
         });
     }
 
+    mountStorageObject = (game, state) => {
+       const object = { name: state.name,
+        email: state.email,
+        score: game.point };
+        return object;
+    }
+
+    markUpValidation = () => {
+        const { name, email } = this.state;
+        if(name === '') {
+            this.setState({
+                nameError: true
+            });
+        } else {
+            this.setState({
+                nameError: false
+            });
+        }
+
+        if(email === '') {
+            this.setState({
+                emailError: true
+            });
+        } else {
+            this.setState({
+                emailError: false
+            });
+        }
+    };
+
     handleSave = () => {
         const { name, email } = this.state;
-        const { resetGameDefaultConfig, fetchCharacters } = this.props;
+        const { resetGameDefaultConfig, fetchCharacters, game } = this.props;
+        this.markUpValidation();
         if (name !== '' && email !== '') {
             this.setState({
                 registerDone: true
             });
+
+            const register = this.mountStorageObject({ ... game}, { ... this.state });
+            localStorage.setItem(name, JSON.stringify(register));
+            console.log('here is the localstorage ', localStorage.getItem(name));
             resetGameDefaultConfig();
             fetchCharacters(consts.DEFAULT_URL);
         }
@@ -64,7 +101,9 @@ class RegisterForm extends Component {
     };
 
     render() {
-        const { registerDone } = this.state;
+        const { registerDone, nameError, emailError } = this.state;
+        console.log('nameError ', nameError);
+        console.log('emailError ', emailError);
         return (
             <Container text>
                 <Form>
@@ -73,7 +112,8 @@ class RegisterForm extends Component {
                             name='name'
                             placeholder='nome'
                             label='nome'
-                            onChange={this.handleInputChange} />
+                            onChange={this.handleInputChange}
+                            error={nameError} />
                     </Field>
 
                     <Field width={6} className='link'>
@@ -81,7 +121,8 @@ class RegisterForm extends Component {
                             name='email'
                             placeholder='email'
                             label='email'
-                            onChange={this.handleInputChange} />
+                            onChange={this.handleInputChange}
+                            error={emailError} />
                     </Field>
 
                     <ActionButton iconType='save'

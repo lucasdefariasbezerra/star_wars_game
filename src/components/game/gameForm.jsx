@@ -90,7 +90,6 @@ class GameForm extends Component {
         }
         calculatePoints(points, shots);
         if (shots === 0) {
-            console.log('cai aqui');
             handleSpecialModal(true);
         }
     }

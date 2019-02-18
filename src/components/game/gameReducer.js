@@ -2,7 +2,7 @@ const INITIAL_STATE = {
    guess: '',
    point: 0,
    infoChecked: false,
-   shots: 2,
+   shots: 10,
    specialModalOpen: false
 };
 
@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
         case 'HANDLE_SPECIAL':
               return { ...state, specialModalOpen: action.payload };
         case 'RESET_CONFIG':
-              return { ...state, point: 0, infoChecked: false, shots: 2 };
+              return { ...state, point: 0, infoChecked: false, shots: 10 };
         default:
             return state;
     }
