@@ -67,6 +67,7 @@
   },
   "dependencies": {
     "cross-env": "5.1.5",
+    "gulp": "^4.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
