@@ -19,7 +19,7 @@
   "scripts": {
     "build-semantic": "cd src/semantic && gulp build-css build-assets",
     "watch-semantic": "cd src/semantic && yarn run build-semantic && gulp watch",
-    "start": "yarn run build-semantic && webpack-dev-server",
+    "start": "webpack-dev-server",
     "lint": "eslint src/**/*.jsx",
     "build": "cross-env NODE_ENV=production webpack",
     "test": "jest"
