@@ -13,7 +13,7 @@
       "\\.(css|less)$": "identity-obj-proxy"
     }
   },
-  "version": "1",
+  "version": "1.0.0",
   "description": "a boilerplate for react in version 16",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,9 @@
     "lint": "eslint src/**/*.jsx",
     "build": "cross-env NODE_ENV=production webpack",
     "test": "jest"
+  },
+  "engines": {
+    "node": "10.15.3"
   },
   "author": "Lucas Bezerra",
   "license": "MIT",
