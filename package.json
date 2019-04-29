@@ -19,9 +19,9 @@
   "scripts": {
     "build-semantic": "cd src/semantic && gulp build-css build-assets",
     "watch-semantic": "cd src/semantic && yarn run build-semantic && gulp watch",
-    "start": "webpack-dev-server --port $PORT --host 0.0.0.0 ",
+    "start": "webpack-dev-server",
     "lint": "eslint src/**/*.jsx",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "webpack",
     "test": "jest"
   },
   "author": "Lucas Bezerra",
