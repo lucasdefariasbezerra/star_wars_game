@@ -1,9 +1,9 @@
-const devMode = process.env.NODE_ENV || 'production';
+const devMode = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    mode: devMode ? 'development' : 'production',
+    mode: devMode,
     entry: './src/index.jsx',
     output: {
         path: __dirname + '/public',
