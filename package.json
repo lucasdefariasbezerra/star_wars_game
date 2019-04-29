@@ -22,8 +22,7 @@
     "start": "webpack-dev-server --port $PORT --host 0.0.0.0 ",
     "lint": "eslint src/**/*.jsx",
     "build": "cross-env NODE_ENV=production webpack",
-    "test": "jest",
-    "postinstall": "webpack -p"
+    "test": "jest"
   },
   "gulp-header": "1.8.2",
   "author": "Lucas Bezerra",
