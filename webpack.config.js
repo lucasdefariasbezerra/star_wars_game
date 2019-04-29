@@ -13,7 +13,11 @@ module.exports = {
     devServer: {
         port: process.env.PORT || 3000,
         contentBase: './public',
-        historyApiFallback: true
+        historyApiFallback: true,
+        allowedHosts: [
+            'starwarsportapp.herokuapp.com',
+            'localhost'
+        ]
     },
     resolve: {
         extensions: ['.js', '.jsx']
